@@ -1,0 +1,51 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Jetbrains mono";
+}
+
+.container {
+  background-color: orange;
+  width: 550px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  gap: 5px;
+}
+
+input {
+  margin: 10px;
+  font-size: 20px;
+  border: 2px solid white;
+  background-color: transparent;
+  border-radius: 8px;
+  outline: none;
+  text-align: center;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.678);
+}
+
+input:focus {
+  border: 2px solid black;
+}
+
+.btn-loggar {
+  font-size: 20px;
+  width: 255px;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: orange;
+  border-radius: 8px;
+  cursor: pointer;
+}
+h1 {
+  text-align: center;
+}
