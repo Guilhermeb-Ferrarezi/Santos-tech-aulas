@@ -49,7 +49,7 @@ export class usuario {
         return;
     }
     if(usuarios.findIndex(usuarios => usuarios.id == index) !== -1){
-        return usuario.slice(index, 1)
+        return usuarios.slice(index, 1)
     }
   }
 }
