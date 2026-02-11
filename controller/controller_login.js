@@ -1,26 +1,33 @@
-import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { usuario } from '../models/usuarios.js'
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import { usuario } from "../models/usuarios.js";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-
-const router = express.Router()
-
-router.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'pages', 'login', 'login.html'))
-})
-
-router.post('/', (req, res) => {
-  const { usuario, senha } = req.body
-  console.log('login:', usuario, senha)
-  res.status(200).send(`Login recebido: ${usuario}, ${senha}`)
-})
+const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send(`Usuarios cadastrados: ${usuario}`)
-})
+  res.sendFile(path.resolve(__dirname, "..", "pages", "login", "login.html"));
+});
 
-export default router
+router.post("/", (req, res) => {
+  const { usuario: loginInput, senha } = req.body;
+  console.log("login:", loginInput, senha);
+
+  const usuarios = usuario.getUsuarios();
+  const usuarioValido = usuarios.find(
+    (usuarioAtual) =>
+      (usuarioAtual.nome === loginInput || usuarioAtual.email === loginInput) &&
+      usuarioAtual.senha === senha,
+  );
+
+  if (usuarioValido) {
+    return res.redirect("/home");
+  }
+
+  return res.status(401).send("Credenciais invalidas");
+});
+
+export default router;

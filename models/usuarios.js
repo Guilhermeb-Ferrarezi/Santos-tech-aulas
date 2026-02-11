@@ -4,7 +4,7 @@ let usuarios = [
     nome: "joana",
     idade: 45,
     email: "joana@gmail.com",
-    senha: "",
+    senha: "1234",
     admin_id: null,
   },
   {
@@ -12,14 +12,17 @@ let usuarios = [
     nome: "guilherme",
     idade: 14,
     email: "guilherme@gmail.com",
-    senha: "",
+    senha: "1234",
     admin_id: 1,
   },
 ];
 
 export class usuario {
-  static getAlunos() {
-    return this.usuarios;
+  static getUsuarios() {
+    return usuarios;
+  }
+  static getUsuarioById(id) {
+    let index = parseInt(id);
   }
   static createUsuario(usuarios) {
     if(!usuarios){
@@ -40,7 +43,7 @@ export class usuario {
       };
 
       usuarios.push(novoUsuario);
-      return this.usuarios;
+      return usuarios;
     }
   }
   static deletarUsuario(id){
@@ -53,3 +56,5 @@ export class usuario {
     }
   }
 }
+
+export default usuario

@@ -1,11 +1,12 @@
 import express  from 'express'
 import cors from 'cors'
-import { usuario } from "./models/usuarios.js"
-import rotas from './controller/controller_home.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import login from './controller/controller_login.js'
 import helmet from "helmet";
+import { usuario } from "./models/usuarios.js"
+import home from './controller/controller_home.js'
+import login from './controller/controller_login.js'
+import users from './controller/controller_users.js'
 
 
 const app = express()
@@ -34,8 +35,10 @@ const usuarios = [
 ]
 
 
-app.use("/", rotas)
+app.use("/", login)
 app.use("/login", login)
+app.use("/home", home)
+app.use("/usuarios", users)
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT} http://localhost:${PORT}/`)
