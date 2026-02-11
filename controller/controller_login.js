@@ -17,8 +17,7 @@ router.post("/", (req, res) => {
   console.log("login:", loginInput, senha);
 
   const usuarios = usuario.getUsuarios();
-  const usuarioValido = usuarios.find(
-    (usuarioAtual) =>
+  const usuarioValido = usuarios.find((usuarioAtual) =>
       (usuarioAtual.nome === loginInput || usuarioAtual.email === loginInput) &&
       usuarioAtual.senha === senha,
   );
