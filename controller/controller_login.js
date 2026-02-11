@@ -24,6 +24,10 @@ router.post("/", (req, res) => {
   );
 
   if (usuarioValido) {
+    if (req.get("X-Requested-With") === "fetch") {
+      return res.status(200).send("Login bem-sucedido");
+    }
+    
     return res.redirect("/home");
   }
 
