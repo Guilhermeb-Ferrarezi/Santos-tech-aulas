@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { usuario } from "../models/usuarios.js";
+import { settings } from "cluster";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,8 +27,9 @@ router.post("/", (req, res) => {
     if (req.get("X-Requested-With") === "fetch") {
       return res.status(200).send("Login bem-sucedido");
     }
-    
-    return res.redirect("/home");
+    setTimeout(() => {
+      return res.redirect("/home");
+    }, 2000);
   }
 
   return res.status(401).send("Credenciais invalidas");
