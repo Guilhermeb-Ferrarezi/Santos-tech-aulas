@@ -8,5 +8,20 @@
 <body>
   <h1>home</h1>
 </body>
-</body>
+<script>
+  (async () => {
+    try {
+      const response = await fetch("/home/check", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        window.location.replace("/login");
+      }
+    } catch (_error) {
+      window.location.replace("/login");
+    }
+  })();
+</script>
 </html>

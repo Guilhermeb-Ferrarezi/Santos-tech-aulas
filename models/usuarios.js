@@ -21,9 +21,7 @@ export class usuario {
   static getUsuarios() {
     return usuarios;
   }
-  static getUsuarioById(id) {
-    let index = parseInt(id);
-  }
+
   static createUsuario(usuarios) {
     if(!usuarios){
         return;
@@ -36,9 +34,9 @@ export class usuario {
     ) {
       const novoUsuario = {
         id: usuarios.length() + 1,
-        nome: usuarios.nome,
-        email: usuarios.email,
-        senha: usuarios.senha,
+        nome: usuarios.nome.trim(),
+        email: usuarios.email.trim(),
+        senha: usuarios.senha.trim(),
         admin_id: usuarios.admin_id,
       };
 

@@ -11,6 +11,12 @@ router.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'pages', 'home', 'index.html'))
 })
 
+router.get('/check', (req, res) => {
+  return res.status(200).json({
+    autenticado: true,
+    usuario: req.user ?? null,
+  })
+})
 
 
 export default router

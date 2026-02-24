@@ -3,17 +3,17 @@ import cors from 'cors'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import helmet from "helmet";
+import cookieParser from "cookie-parser";
 import { usuario } from "./models/usuarios.js"
 import home from './controller/controller_home.js'
 import login from './controller/controller_login.js'
 import users from './controller/controller_users.js'
+import logado from './middlewares/auth.js';
 
 
 const app = express()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
-
 
 app.use(cors())
 app.use(
@@ -25,6 +25,7 @@ app.use(
 app.use(express.static(path.resolve(__dirname, 'pages')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cookieParser())
 const PORT = 3000
 
 
@@ -37,8 +38,8 @@ const usuarios = [
 
 app.use("/", login)
 app.use("/login", login)
-app.use("/home", home)
-app.use("/usuarios", users)
+app.use("/home", logado, home)
+app.use("/usuarios", logado, users)
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT} http://localhost:${PORT}/`)
