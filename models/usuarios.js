@@ -1,3 +1,12 @@
+class student{
+  id;
+  name
+  age
+  email
+  password
+  admin_id
+}
+
 let usuarios = [
   {
     id: 1,
