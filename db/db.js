@@ -1,31 +1,21 @@
-import mysql from 'mysql'
+import pg from "pg";
+const { Pool } = pg;
+import express from 'express'
 
-class db {
-    constructor(){
-        if (!db.dbInstance){
-            return db.dbInstance
-        }
-    }
-    connection(){
-        return this.pool;
-    }
-    insertStudent(_student){
-        async function existentId(){ 
-            await this.pool.query(`SELECT * FROM student WHERE id = ${_student.id}`)
-        }
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
 
-        if (rows){
-            return false 
-        }
-        if (typeof(_student) === "student"){
-            let  sql = `INSERT INTO student ( id, name, age, email, password, admin_id) VALUES(${_student.id }, ${_student.name}, ${_student.age}, ${_student.email}, ${_student.password}, ${_student.admin_id})`
-            this.pool.query(sql)
-            return true
-        }
-        return false
-    }
+const health = pool.connect();
+
+export default function databaseConnect() {
+  const { usuario, senha } = req.body;
+
+  const { query } = pool.query(`SELECT * FROM user WHERE name = ${usuario}`);
+  if (!health) {
+    console.log("erro");
+    return;
+  }
+  console.log("deu bom");
+  return query
 }
-
-export const dbInstance = database()
-
-Object.freeze(dbInstance)

@@ -1,0 +1,1 @@
+nao cometa erros de caracteres especiais
