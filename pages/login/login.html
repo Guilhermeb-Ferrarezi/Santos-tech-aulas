@@ -40,15 +40,12 @@
       try {
         const resposta = await fetch("/login", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Requested-With": "fetch",
-          },
+          headers: {"Content-Type": "application/json",},
           body: JSON.stringify({ usuario, senha }),
         });
 
-        const texto = await resposta.text();
-        msg.textContent = texto;
+        const data = await resposta.json();
+        msg.textContent = data?.message ?? "Resposta sem mensagem";
         msg.style.color = resposta.ok ? "green" : "#7a0000";
 
         if (resposta.ok) {
